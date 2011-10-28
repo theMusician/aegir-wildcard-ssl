@@ -1,7 +1,7 @@
 
 <?php if ($this->ssl_enabled && $this->ssl_key) : ?>
 
-  <VirtualHost <?php print "{$ip_address}:{$http_ssl_port}"; ?>>
+  <VirtualHost <?php print "*:{$http_ssl_port}"; ?>>
   <?php if ($this->site_mail) : ?>
     ServerAdmin <?php  print $this->site_mail; ?> 
   <?php endif;?>
