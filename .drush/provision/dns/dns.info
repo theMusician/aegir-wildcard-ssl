@@ -1,0 +1,13 @@
+name = Provision: DNS
+description = Provides provisioning requirements for DNS servers
+package = Provision
+dependencies[] = provision
+
+core = 6.x
+
+; Information added by drupal.org packaging script on 2011-09-21
+version = "6.x-1.4"
+core = "6.x"
+project = "provision"
+datestamp = "1316623906"
+
