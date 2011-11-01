@@ -155,7 +155,7 @@ class provisionService_http_ssl extends provisionService_http_public {
 
     $pattern = "{$path}/{$ssl_key}__*.receipt";
     $files = glob($pattern);
-    if (sizeof($files) == 1) {
+    if (sizeof($files) >= 1) {
       $pattern = "/^{$ssl_key}__(.*)\.receipt$/";
       preg_match($pattern, basename($files[0]), $matches);
       if (in_array($matches[1], $server->ip_addresses)) {
