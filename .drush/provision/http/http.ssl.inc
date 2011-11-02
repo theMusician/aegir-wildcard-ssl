@@ -155,7 +155,7 @@ class provisionService_http_ssl extends provisionService_http_public {
 
     $pattern = "{$path}/{$ssl_key}__*.receipt";
     $files = glob($pattern);
-    if (sizeof($files) >= 1) {
+    if (sizeof($files) == 1) {
       $pattern = "/^{$ssl_key}__(.*)\.receipt$/";
       preg_match($pattern, basename($files[0]), $matches);
       if (in_array($matches[1], $server->ip_addresses)) {
@@ -171,10 +171,10 @@ class provisionService_http_ssl extends provisionService_http_public {
 
     // try to assign one
     foreach ($server->ip_addresses as $ip) {
-      if (!provisionService_http_ssl::get_ip_certificate($ip, $server)) {
+      //if (!provisionService_http_ssl::get_ip_certificate($ip, $server)) {
         touch("{$path}/{$ssl_key}__{$ip}.receipt");
         return $ip;
-      }
+      //}
     }
 
     return FALSE; // generate error
