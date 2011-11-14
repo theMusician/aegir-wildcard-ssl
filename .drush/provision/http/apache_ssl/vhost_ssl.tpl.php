@@ -1,7 +1,14 @@
-
-<?php if ($this->ssl_enabled && $this->ssl_key) : ?>
-
-  <VirtualHost <?php print "*:{$http_ssl_port}"; ?>>
+/**
+* If the SAN Module is enabled, use wildcard ip for the VirtualHost
+*/
+<?php if ($this->ssl_enabled && $this->ssl_key && $this->san_enabled)) : ?>
+	<VirtualHost <?php print "*:{$http_ssl_port}"; ?>>
+  
+  <?php elseif ($this->ssl_enabled && $this->ssl_key) : ?>
+    <VirtualHost <?php print "{$ip_address}:{$http_ssl_port}"; ?>>
+  
+  <?php endif; ?>
+  
   <?php if ($this->site_mail) : ?>
     ServerAdmin <?php  print $this->site_mail; ?> 
   <?php endif;?>
