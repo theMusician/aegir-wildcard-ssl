@@ -1,0 +1,41 @@
+<?php
+/**
+* Implementation of hook_schema().
+*/
+function hosting_san_schema() {
+  $schema['hosting_san'] = array(
+    'fields' => array(
+      'vid' => array(
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'nid' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'san_enabled' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+		'default' => 0,
+      ),
+    ),
+  );
+  return
+$schema;
+}
+
+function
+hosting_san_install() {
+  // Create tables.
+  drupal_install_schema('hosting_san');
+}
+function
+hosting_san_uninstall() {
+  // Remove tables.
+  drupal_uninstall_schema('hosting_san');
+}
+?>

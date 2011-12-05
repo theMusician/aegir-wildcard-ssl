@@ -1,0 +1,7 @@
+name = Service Alternate Names (SANs) Support
+description = Enable your sites to use SSLs with SAN support. This allows one IP address to be used with multiple domains.
+package = Hosting
+dependencies[] = hosting
+dependencies[] = hosting_web_server
+dependencies[] = hosting_ssl
+core = 6.x
