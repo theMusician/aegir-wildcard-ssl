@@ -1,0 +1,37 @@
+From 8b3ee094f9731222c465afafb2141551265ba58e Mon Sep 17 00:00:00 2001
+From: Max Bronsema <maxbrons@uoregon.edu>
+Date: Tue, 1 Nov 2011 17:51:29 -0700
+Subject: [PATCH] Ignore the 1 ip address per SSL cert during the verify task
+
+---
+ .drush/provision/http/http.ssl.inc |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/.drush/provision/http/http.ssl.inc b/.drush/provision/http/http.ssl.inc
+index a4c9d6e..8ae6af3 100644
+--- a/.drush/provision/http/http.ssl.inc
++++ b/.drush/provision/http/http.ssl.inc
+@@ -155,7 +155,7 @@ class provisionService_http_ssl extends provisionService_http_public {
+ 
+     $pattern = "{$path}/{$ssl_key}__*.receipt";
+     $files = glob($pattern);
+-    if (sizeof($files) >= 1) {
++    if (sizeof($files) == 1) {
+       $pattern = "/^{$ssl_key}__(.*)\.receipt$/";
+       preg_match($pattern, basename($files[0]), $matches);
+       if (in_array($matches[1], $server->ip_addresses)) {
+@@ -171,10 +171,10 @@ class provisionService_http_ssl extends provisionService_http_public {
+ 
+     // try to assign one
+     foreach ($server->ip_addresses as $ip) {
+-      if (!provisionService_http_ssl::get_ip_certificate($ip, $server)) {
++      //if (!provisionService_http_ssl::get_ip_certificate($ip, $server)) {
+         touch("{$path}/{$ssl_key}__{$ip}.receipt");
+         return $ip;
+-      }
++      //}
+     }
+ 
+     return FALSE; // generate error
+-- 
+1.7.5.1+GitX
